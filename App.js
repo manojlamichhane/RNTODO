@@ -1,14 +1,27 @@
-import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import MainNavigator from "./navigation/MainNavigator";
-import { Provider as PaperProvider } from "react-native-paper";
+import { DefaultTheme, Provider as PaperProvider } from "react-native-paper";
+import { Provider } from "react-redux";
+import { Store } from "./components/Redux/Store";
 
 export default function App() {
+  const theme = {
+    ...DefaultTheme,
+    roundness: 2,
+    colors: {
+      ...DefaultTheme.colors,
+      primary: "#EA514C",
+      accent: "white",
+    },
+  };
+
   return (
-    <PaperProvider>
-      <MainNavigator />
-    </PaperProvider>
+    <Provider store={Store}>
+      <PaperProvider theme={theme}>
+        <MainNavigator />
+      </PaperProvider>
+    </Provider>
   );
 }
 
